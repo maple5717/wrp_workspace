@@ -5,4 +5,5 @@ sample_data/
 sample_data*
 *.pdf
 *.gv
+.vscode/
 

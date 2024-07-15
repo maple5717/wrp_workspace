@@ -118,13 +118,13 @@ def generate_launch_description():
         'config',
         'wheelchair.rviz'
     )
-    rviz_node = Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            arguments=['-d', rviz_file],
-            parameters=[{'use_sim_time': False}],
-            output='screen')
+    # rviz_node = Node(
+    #         package='rviz2',
+    #         executable='rviz2',
+    #         name='rviz2',
+    #         arguments=['-d', rviz_file],
+    #         parameters=[{'use_sim_time': False}],
+    #         output='screen')
 
 
     ld = LaunchDescription()
@@ -141,6 +141,6 @@ def generate_launch_description():
     ld.add_action(cartographer_node)
     ld.add_action(cartographer_occupancy_grid_node)
 
-    ld.add_action(rviz_node)
+    # ld.add_action(rviz_node)
 
     return ld
