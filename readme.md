@@ -11,8 +11,16 @@ git clone https://github.com/maple5717/wrp_workspace.git
 cd wrp_workspace
 ```
 Install Nav2 & cartographer
-
 https://docs.nav2.org/getting_started/index.html
+```
+sudo apt install ros-humble-navigation2
+sudo apt install ros-humble-nav2-bringup
+sudo apt install ros-humble-cartographer
+```
+Build the package
+```
+colcon build --symlink-install
+```
 
 todo: 
 1. load urdf and robot_state_publisher
