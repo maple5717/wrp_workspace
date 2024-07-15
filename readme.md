@@ -4,7 +4,7 @@ Navigation support of nus-wheelchair.
 ## System Requirements ##
 Ubuntu 22.04 with ROS2 Humble installed
 
-# Install #
+# Installation #
 clone the repository 
 ```
 git clone https://github.com/maple5717/wrp_workspace.git
