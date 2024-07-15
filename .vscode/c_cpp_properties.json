@@ -1,0 +1,29 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/crslab/wrp_workspace/install/wrp_sdk_robot/include/**",
+        "/home/crslab/wrp_workspace/install/wrp_sdk_periph/include/**",
+        "/home/crslab/wrp_workspace/install/wrp_sdk_msgs/include/**",
+        "/home/crslab/wrp_workspace/install/rslidar_msg/include/**",
+        "/home/crslab/wrp_workspace/install/pointcloud_to_laserscan/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/crslab/wrp_workspace/src/pointcloud_to_laserscan/include/**",
+        "/home/crslab/wrp_workspace/src/wheelchair_slam/include/**",
+        "/home/crslab/wrp_workspace/src/wrp_ros2/wrp_sdk_periph/include/**",
+        "/home/crslab/wrp_workspace/src/wrp_ros2/wrp_sdk_robot/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

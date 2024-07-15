@@ -1,0 +1,8 @@
+*log/
+install/
+build/
+sample_data/
+sample_data*
+*.pdf
+*.gv
+

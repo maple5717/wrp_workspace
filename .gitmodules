@@ -1,0 +1,4 @@
+[submodule "src/pointcloud_to_laserscan"]
+	path = src/pointcloud_to_laserscan
+	url = https://github.com/ros-perception/pointcloud_to_laserscan.git
+	branch = humble
