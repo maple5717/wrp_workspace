@@ -2,3 +2,7 @@
 	path = src/pointcloud_to_laserscan
 	url = https://github.com/ros-perception/pointcloud_to_laserscan.git
 	branch = humble
+
+[submodule "src/simple_2d_lidar_odometry"]
+	path = src/simple_2d_lidar_odometry
+	url = https://github.com/dawan0111/Simple-2D-LiDAR-Odometry.git
