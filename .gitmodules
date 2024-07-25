@@ -1,6 +1,23 @@
 [submodule "src/pointcloud_to_laserscan"]
-	path = src/pointcloud_to_laserscan
+	path = src/slam/pointcloud_to_laserscan
 	url = https://github.com/ros-perception/pointcloud_to_laserscan.git
 	branch = humble
 
 
+[submodule "src/Simple-2D-LiDAR-Odometry"]
+	path = src/slam/Simple-2D-LiDAR-Odometry
+	url = https://github.com/dawan0111/Simple-2D-LiDAR-Odometry.git
+[submodule "src/wr_arm_ros2"]
+	path = src/wr_arm_ros2
+	url = https://github.com/westonrobot/wr_arm_ros2.git
+	branch = humble
+[submodule "src/slam/orbslam3_ros2"]
+	path = src/slam/orbslam3_ros2
+	url = https://github.com/zang09/ORB_SLAM3_ROS2.git
+	branch = humble
+[submodule "src/slam/ORB-SLAM3-STEREO-FIXED"]
+	path = src/slam/ORB-SLAM3-STEREO-FIXED
+	url = https://github.com/zang09/ORB-SLAM3-STEREO-FIXED.git
+[submodule "src/peripheral/realsense-ros"]
+	path = src/peripheral/realsense-ros
+	url = https://github.com/IntelRealSense/realsense-ros.git
