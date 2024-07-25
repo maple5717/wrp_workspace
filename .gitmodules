@@ -11,10 +11,6 @@
 	path = src/wr_arm_ros2
 	url = https://github.com/westonrobot/wr_arm_ros2.git
 	branch = humble
-[submodule "src/slam/orbslam3_ros2"]
-	path = src/slam/orbslam3_ros2
-	url = https://github.com/zang09/ORB_SLAM3_ROS2.git
-	branch = humble
 [submodule "src/slam/ORB-SLAM3-STEREO-FIXED"]
 	path = src/slam/ORB-SLAM3-STEREO-FIXED
 	url = https://github.com/zang09/ORB-SLAM3-STEREO-FIXED.git
