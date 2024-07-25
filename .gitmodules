@@ -17,3 +17,9 @@
 [submodule "src/peripheral/realsense-ros"]
 	path = src/peripheral/realsense-ros
 	url = https://github.com/IntelRealSense/realsense-ros.git
+[submodule "src/slam/orbslam3_ros2"]
+	path = src/slam/orbslam3_ros2
+	url = https://github.com/maple5717/orbslam3_ros2.git
+[submodule "orbslam3_ros2"]
+	path = orbslam3_ros2
+	url = https://github.com/maple5717/orbslam3_ros2.git
