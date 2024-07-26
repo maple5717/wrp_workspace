@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wheelchair_robot">
+    <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+
+    <!-- Import wheelchair_robot urdf file -->
+    <xacro:include filename="$(find wheelchair_config)/config/wheelchair_robot.urdf" />
+
+    <!-- Import control_xacro -->
+    <xacro:include filename="wheelchair_robot.ros2_control.xacro" />
+
+
+    <xacro:wheelchair_robot_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
+
+</robot>

@@ -1,0 +1,25 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: wheelchair_config
+    relative_path: config/wheelchair_robot.urdf
+  srdf:
+    relative_path: config/wheelchair_robot.srdf
+  package_settings:
+    author_name: clearlab
+    author_email: ThisIsIntentionallyLeftBlank@jajaja.com
+    generated_timestamp: 1721324667
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+      - velocity
