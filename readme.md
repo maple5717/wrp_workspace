@@ -26,6 +26,13 @@ Please make sure the package ```realsense-ros``` is cloned to ```src/camera```
 ...
 
 ### ORB-SLAM3 ###
+Install epoxy
+```
+sudo apt-get install libepoxy-dev
+```
+Clone and build [Pangolin](https://github.com/stevenlovegrove/Pangolin)
+
+
 Please make sure the forked repository ```orbslam3_ros2```  [[link](github.com/maple5717/orbslam3_ros2)] is cloned to ```src/slam```
 
 Install g20
