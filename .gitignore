@@ -6,4 +6,5 @@ sample_data*
 *.pdf
 *.gv
 .vscode/
-
+*.so*
+*.txt
