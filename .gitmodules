@@ -20,3 +20,6 @@
 [submodule "src/slam/orbslam3_ros2"]
 	path = src/slam/orbslam3_ros2
 	url = https://github.com/maple5717/orbslam3_ros2.git
+[submodule "src/slam/odom_predictor"]
+	path = src/slam/odom_predictor
+	url = https://github.com/maple5717/odom_predictor.git
