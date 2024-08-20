@@ -12,7 +12,7 @@ clone this repository
 git clone --recursive https://github.com/maple5717/wrp_workspace.git
 cd wrp_workspace 
 ```
-### Nav2 & cartographer ###
+### Nav2 & cartographer (ROS2) ###
 <!-- Please refer to the [installation guide](https://docs.nav2.org/getting_started/index.html) -->
 ```
 sudo apt install ros-humble-navigation2
@@ -23,13 +23,20 @@ sudo apt install ros-humble-cartographer-ros
 install Cartographer using [this link](https://ros2-industrial-workshop.readthedocs.io/en/latest/_source/navigation/ROS2-Cartographer.html)
 
 
-### RealSense ###
-Please make sure the package ```realsense-ros``` is cloned to ```src/camera```
+### RealSense (ROS2) ###
+Please make sure the [librealsense](https://github.com/IntelRealSense/librealsense) is installed and the package ```realsense-ros``` is cloned to ```src/camera```
 ...
 
+### gmapping (ROS1) ###
+```
+sudo apt install ros-noetic-gmapping
+```
 
-### ORB-SLAM3 ###
-<!-- Install epoxy
+### VIO (ROS1) ###
+In this project, we use the HKUST VINS-Mono VIO. Please follow the guidance in this [forked repository](https://github.com/maple5717/VINS-Mono) to build up the dependencies. 
+
+<!-- ### ORB-SLAM3 (ROS2) ###
+ Install epoxy
 ```
 sudo apt-get install libepoxy-dev
 ```
@@ -44,7 +51,9 @@ sudo apt-get install ros-humble-libg2o
 ```
 Install orbslam following the instructions from the original [ORB_SLAM3_ROS2 repository](github.com/zang09/ORB_SLAM3_ROS2). **Do not forget to correctly set ORB_SLAM3_ROOT_DIR** -->
 
-Build the ROS2 project 
+
+
+Finally, build the ROS2 project 
 ```
 colcon build --symlink-install
 source install/setup.bash # optional
