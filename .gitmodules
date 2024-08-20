@@ -20,6 +20,10 @@
 [submodule "src/slam/orbslam3_ros2"]
 	path = src/slam/orbslam3_ros2
 	url = https://github.com/maple5717/orbslam3_ros2.git
-[submodule "src/slam/odom_predictor"]
-	path = src/slam/odom_predictor
-	url = https://github.com/maple5717/odom_predictor.git
+
+[submodule "src/vio/Kimera-VIO-ROS2"]
+	path = src/vio/Kimera-VIO-ROS2
+	url = https://github.com/MIT-SPARK/Kimera-VIO-ROS2.git
+[submodule "ros1_ws/src/VINS-Mono"]
+	path = ros1_ws/src/VINS-Mono
+	url = https://github.com/maple5717/VINS-Mono
