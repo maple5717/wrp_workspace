@@ -32,13 +32,20 @@ def generate_launch_description():
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(join(realsense2_share_dir, 'launch/rs_launch.py')),
             launch_arguments={
-                'unite_imu_method': '2',
-                'align_depth.enable': 'true',
+                'unite_imu_method': '1',
+                # 'align_depth.enable': 'true',
                 'enable_accel': 'true',
                 'enable_gyro': 'true',
-                'depth_module.depth_profile': '640x480x30',
-                # 'depth_module.infra_profile': '640x480x30', 
-                'rgb_camera.color_profile': '640x480x30'
+                'enable_infra1': 'true',
+                'enable_infra2': 'true', 
+                'enable_depth': 'false',  #
+                'depth_module.emitter_enabled': 'false', #
+                'depth_module.emitter_always_on': 'false', #
+                'initial_reset': 'true',
+                'depth_module.depth_profile': '640x480x15',
+                'depth_module.infra_profile': '640x480x15', 
+                'rgb_camera.color_profile': '640x480x15', 
+                'rgb_camera.power_line_frequency': '1'
             }.items()
         ),
         

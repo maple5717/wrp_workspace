@@ -1,0 +1,101 @@
+<?xml version="1.0" ?>
+<robot name="wheelchair_robot">
+
+  <!-- Base Link -->
+  <link name="base_link">
+    <!-- Add geometry, inertial, and visual elements for the base link -->
+  </link>
+
+  <!-- Lidar Link -->
+  <link name="rslidar">
+    <!-- Add geometry, inertial, and visual elements for the lidar link -->
+  </link>
+
+  <!-- Manipulator Link -->
+  <link name="manipulator_link">
+    <!-- Add geometry, inertial, and visual elements for the manipulator link -->
+  </link>
+
+
+
+  <!-- Base to Lidar Joint -->
+  <joint name="base_to_lidar_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="rslidar"/>
+    <!-- <origin xyz="-0.1869 0 1.4697" rpy="0.0331613 0 -1.57"/> -->
+    <origin xyz="-0.1869 0 1.4697" rpy="0.0 0 -1.57"/>
+  </joint>
+
+  <!-- Base to Manipulator Joint -->
+  <joint name="base_to_manipulator_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="manipulator_link"/>
+    <origin xyz="0.4416 0.2775 0.5204" rpy="0 0 3.14"/>
+  </joint>
+  
+
+  <!-- Front Right Wheel Link -->
+  <link name="front_right_wheel_link">
+    <!-- Add geometry, inertial, and visual elements for front right wheel link -->
+  </link>
+
+  <!-- Front Left Wheel Link -->
+  <link name="front_left_wheel_link">
+    <!-- Add geometry, inertial, and visual elements for front left wheel link -->
+  </link>
+
+  <!-- Rear Right Wheel Link -->
+  <link name="rear_right_wheel_link">
+    <!-- Add geometry, inertial, and visual elements for rear right wheel link -->
+  </link>
+
+  <!-- Rear Left Wheel Link -->
+  <link name="rear_left_wheel_link">
+    <!-- Add geometry, inertial, and visual elements for rear left wheel link -->
+  </link>
+
+  <!-- Front Right Wheel Joint -->
+  <joint name="front_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_right_wheel_link"/>
+    <origin xyz="0.55 -0.2625 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- Front Left Wheel Joint -->
+  <joint name="front_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="front_left_wheel_link"/>
+    <origin xyz="0.55 0.2625 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- Rear Right Wheel Joint -->
+  <joint name="rear_right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_right_wheel_link"/>
+    <origin xyz="0 -0.280 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+  <!-- Rear Left Wheel Joint -->
+  <joint name="rear_left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="rear_left_wheel_link"/>
+    <origin xyz="0 0.280 0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+  </joint>
+
+    <link name="camera_link">
+    <!-- Add geometry, inertial, and visual elements for the manipulator link -->
+  </link>
+
+  <joint name="base_camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+    <!-- <origin xyz="0 0 0.32" rpy="1.5707963 0 1.5707963"/> -->
+    <origin xyz="0 0 0.32" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+</robot>

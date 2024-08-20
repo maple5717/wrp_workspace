@@ -1,0 +1,109 @@
+ekf_node:
+  ros__parameters:
+    # Frame IDs
+    odom_frame: "odom"
+    map_frame: "odom"
+    base_link_frame: "base_link"
+    imu_frame: "camera_imu_optical_frame"
+
+    # Sensor data sources
+    use_sim_time: false
+    publish_tf: true
+    publish_acceleration: false
+
+    two_d_mode: true
+    frequency: 20.0
+    sensor_timeout: 0.1
+
+    # IMU configuration
+    # imu0: "/camera/camera/imu"  # The topic for IMU data
+    # imu0_config: [false, false, false,  # x, y, z
+    #               false, false, true,     # roll ,pitch, yaw
+    #               false, false, false,    # x', y', z'
+    #               false, false, true,    # roll' ,pitch', yaw'
+    #               true, true, false,  # x'', y'', z''
+    #               ]
+    # imu0_config: [false, false, false,    # x, y, z
+    #               false, false, false,     # roll ,pitch, yaw
+    #               false, false, false,    # x', y', z'
+    #               true, true, true,    # roll' ,pitch', yaw'
+    #               false, false, false,  # x'', y'', z''
+    #               ]
+
+    # imu_queue_size: 1
+
+    # No odometry configuration
+    odom0: "/vins_estimator/odometry" # "/kimera_vio_ros/odometry"  
+    odom0_config: [true, true, false,  # x, y, z
+                  false, false, true,     # roll ,pitch, yaw
+                  true, true, false,    # x', y', z'
+                  false, false, true,    # roll' ,pitch', yaw'
+                  false, false, false,  # x'', y'', z''
+                  ]
+
+    # Process noise parameters (these may need tuning for your robot)
+    process_noise_covariance: [1e-5, 1e-5, 1e-5,  # Noise for x, y, and yaw
+                               1e-5, 1e-5, 1e-5, 
+                               1e-5, 1e-5, 1e-5,
+                               1e-5, 1e-5, 1e-5, 
+                               1e-5, 1e-5, 1e-5]
+
+    # Measurement noise parameters (these may need tuning for your sensors)
+    measurement_noise_covariance: [1e-5, 1e-5, 1e-5,  # Noise for x, y, and yaw
+                                    1e-5, 1e-5, 1e-5, 
+                                    1e-5, 1e-5, 1e-5,
+                                    1e-5, 1e-5, 1e-5, 
+                                    1e-5, 1e-5, 1e-5]
+
+
+
+
+    # No odometry configuration
+    # odom0: ""  
+    # odom0_config: []
+
+    # Process noise parameters (these may need tuning for your robot)
+    # process_noise_covariance: [1e-5, 1e-5, 1e-5,  # Noise for x, y, and yaw
+    #                            1e-5, 1e-5, 1e-5, 
+    #                            1e-5, 1e-5, 1e-5,
+    #                            1e-5, 1e-5, 1e-5, 
+    #                            1e-5, 1e-5, 1e-5]
+
+    # Measurement noise parameters (these may need tuning for your sensors)
+    # measurement_noise_covariance: [1e-5, 1e-5, 1e-5,  # Noise for x, y, and yaw
+    #                                 1e-5, 1e-5, 1e-5, 
+    #                                 1e-5, 1e-5, 1e-5,
+    #                                 1e-5, 1e-5, 1e-5, 
+    #                                 1e-5, 1e-5, 1e-5]
+
+    process_noise_covariance: [0.05,   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.05,   0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.05,   0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.05,   0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.05,   0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.05,   0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.05,   0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.05,   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.05,   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.05,   0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.05,   0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.05,   0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.05,   0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.05,   0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.05]
+
+    initial_estimate_covariance: [1e-5,   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    1e-5,   0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    1e-5,   0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    1e-5,   0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    1e-5,   0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    1e-5,   0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    1e-5,   0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     1e-5,   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     1e-5,   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    1e-5,   0.0,    0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    1e-5,   0.0,    0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    1e-5,   0.0,    0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    1e-5,   0.0,    0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    1e-5,   0.0,
+                                   0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    0.0,     0.0,     0.0,    0.0,    0.0,    0.0,    0.0,    0.0,    1e-5]

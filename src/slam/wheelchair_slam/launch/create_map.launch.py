@@ -20,26 +20,37 @@ def generate_launch_description():
     # )
 
     # temporary frame definition
-    base_tf = Node(
-            package='tf2_ros',
-            executable='static_transform_publisher',
-            arguments=['0', '0', '0', '0', '0', '0', '1', 'odom', 'base_link'],
-            output='screen',
-        )
+    # base_tf = Node(
+    #         package='tf2_ros',
+    #         executable='static_transform_publisher',
+    #         arguments=['0', '0', '0', '0', '0', '0', '1', 'odom', 'base_link'],
+    #         output='screen',
+    #     )
     
-    odom_tf = Node(
+    # odom_tf = Node(
+    #         package='tf2_ros',
+    #         executable='static_transform_publisher',
+    #         arguments=['0', '0', '0', '0', '0', '0', '1', 'map', 'odom'],
+    #         output='screen',
+    #     )
+
+    
+    camera_base_tf = Node(
             package='tf2_ros',
             executable='static_transform_publisher',
-            arguments=['0', '0', '0', '0', '0', '0', '1', 'map', 'odom'],
-            output='screen',
+            name='camera_base_tf',
+            arguments=['1.0', '0', '1.201', '0.5', '-0.5', '0.5', '-0.5', 'base_link', 'camera_link'],
+            # output='screen',
         )
-
     lidar_base_tf = Node(
             package='tf2_ros',
             executable='static_transform_publisher',
+            name='lidar_base_tf', 
             arguments=['0', '0', '1.657', '0', '0', '0', '1', 'base_link', 'rslidar'],
-            output='screen',
+            # output='screen',
         )
+    # arguments=['0', '0', '1.2', '0.5', '0.5', '0.5', '0.5', 'base_link', 'camera_link'],
+    # arguments=['0', '0', '1.2', '0', '0', '0', '1', 'base_link', 'camera_link'],
     
     # fake_tf_publisher = Node(
     #         # package=FindPackageShare('wheelchair_slam').find('wheelchair_slam'),  # Replace with your actual package name
@@ -62,8 +73,8 @@ def generate_launch_description():
                 'transform_tolerance': 0.01,
                 'min_height': 0.0,
                 'max_height': 2.0,
-                'angle_min': -1.5708,  # -M_PI/2
-                'angle_max': 1.5708,  # M_PI/2
+                'angle_min': -3.1416,  # -M_PI/2
+                'angle_max': 3.1416,  # M_PI/2
                 'angle_increment': 0.0087,  # M_PI/360.0
                 'scan_time': 0.1,
                 'range_min': 0.2,
@@ -90,7 +101,11 @@ def generate_launch_description():
             '-configuration_basename', 'wheelchair_2d.lua'
             ],
         remappings = [
-            ('/odom', 'mobile_base_node/odom')],
+            # ('/odom', '/mobile_base_node/odom')
+            # ('/odom', '/kimera_vio_ros/odometry')
+            # ('/odom', '/vins_estimator/odometry')
+            ('/odom', '/odometry/filtered')
+            ],
         output = 'screen'
         )
     
@@ -118,13 +133,36 @@ def generate_launch_description():
         'config',
         'wheelchair.rviz'
     )
-    # rviz_node = Node(
-    #         package='rviz2',
-    #         executable='rviz2',
-    #         name='rviz2',
-    #         arguments=['-d', rviz_file],
-    #         parameters=[{'use_sim_time': False}],
-    #         output='screen')
+    rviz_node = Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            arguments=['-d', rviz_file],
+            parameters=[{'use_sim_time': False}],
+            output='screen')
+    
+
+    robot_state_publisher = Node(
+            package='robot_state_publisher',
+            executable='robot_state_publisher',
+            name='robot_state_publisher',
+            output='screen',
+            parameters=[{
+                'robot_description': open(os.path.join(config_dir, "wheelchair_robot.urdf"), 'r').read()
+            }
+            ]
+    )
+
+    wheelchair_slam_share_dir = FindPackageShare('wheelchair_slam').find('wheelchair_slam')
+    ekf_config_file = str(wheelchair_slam_share_dir) + '/config/imu_odom.yaml'
+    ekf = Node(
+            package='robot_localization',
+            executable='ekf_node',
+            name='ekf_node',
+            output='screen',
+            parameters=[ekf_config_file],
+        
+        )
 
 
     ld = LaunchDescription()
@@ -133,14 +171,15 @@ def generate_launch_description():
     # ld.add_action(start_sync_slam_toolbox_node)
     # ld.add_action(base_tf)
     # ld.add_action(odom_tf)
-    ld.add_action(lidar_base_tf)
-    # ld.add_action(base_tf)
+    # ld.add_action(camera_base_tf)
+    # ld.add_action(lidar_base_tf)
     # ld.add_action(fake_tf_publisher)
 
-    ld.add_action(pointcloud_to_laserscan)
-    ld.add_action(cartographer_node)
-    ld.add_action(cartographer_occupancy_grid_node)
+    # ld.add_action(pointcloud_to_laserscan)
+    # ld.add_action(cartographer_node)
+    # ld.add_action(cartographer_occupancy_grid_node)
 
-    # ld.add_action(rviz_node)
-
+    ld.add_action(rviz_node)
+    ld.add_action(robot_state_publisher)
+    # ld.add_action(ekf)
     return ld
