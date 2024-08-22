@@ -107,6 +107,10 @@ roslaunch vins_estimator realsense_color.launch # make sure the realsense config
 roslaunch mapping gmapping.launch
 ```
 
+To save the map, run 
+```
+ros2 run nav2_map_server map_saver_cli -t /map -f ssi --ros-args -p save_map_timeout:=100
+```
 ## Potential Problems ##
 If you meet the QOS problem when subscribing to the imu data, please refer to the solution in [this link](https://github.com/IntelRealSense/realsense-ros/issues/3033#issuecomment-1983139591)
 
