@@ -6,7 +6,7 @@ ROS2 installed (tested with humble and foxy)
 
 ROS1 installed (tested with noetic)
 
-ros1_bridge installed (see [this link](https://github.com/ros2/ros1_bridge))
+ros1_bridge (correct version) installed (see [this link](https://github.com/ros2/ros1_bridge))
 
 ## Installation ##
 clone this repository 
