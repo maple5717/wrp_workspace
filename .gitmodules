@@ -3,27 +3,26 @@
 	url = https://github.com/ros-perception/pointcloud_to_laserscan.git
 	branch = humble
 
-
-[submodule "src/Simple-2D-LiDAR-Odometry"]
-	path = src/slam/Simple-2D-LiDAR-Odometry
-	url = https://github.com/dawan0111/Simple-2D-LiDAR-Odometry.git
-[submodule "src/wr_arm_ros2"]
-	path = src/wr_arm_ros2
-	url = https://github.com/westonrobot/wr_arm_ros2.git
-	branch = humble
-[submodule "src/slam/ORB-SLAM3-STEREO-FIXED"]
-	path = src/slam/ORB-SLAM3-STEREO-FIXED
-	url = https://github.com/zang09/ORB-SLAM3-STEREO-FIXED.git
+# [submodule "src/Simple-2D-LiDAR-Odometry"]
+# 	path = src/slam/Simple-2D-LiDAR-Odometry
+# 	url = https://github.com/dawan0111/Simple-2D-LiDAR-Odometry.git
+# [submodule "src/wr_arm_ros2"]
+# 	path = src/wr_arm_ros2
+# 	url = https://github.com/westonrobot/wr_arm_ros2.git
+# 	branch = humble
+# [submodule "src/slam/ORB-SLAM3-STEREO-FIXED"]
+# 	path = src/slam/ORB-SLAM3-STEREO-FIXED
+# 	url = https://github.com/zang09/ORB-SLAM3-STEREO-FIXED.git
+# [submodule "src/slam/orbslam3_ros2"]
+# 	path = src/slam/orbslam3_ros2
+# 	url = https://github.com/maple5717/orbslam3_ros2.git
 [submodule "src/peripheral/realsense-ros"]
 	path = src/peripheral/realsense-ros
 	url = https://github.com/IntelRealSense/realsense-ros.git
-[submodule "src/slam/orbslam3_ros2"]
-	path = src/slam/orbslam3_ros2
-	url = https://github.com/maple5717/orbslam3_ros2.git
 
-[submodule "src/vio/Kimera-VIO-ROS2"]
-	path = src/vio/Kimera-VIO-ROS2
-	url = https://github.com/MIT-SPARK/Kimera-VIO-ROS2.git
+# [submodule "src/vio/Kimera-VIO-ROS2"]
+# 	path = src/vio/Kimera-VIO-ROS2
+# 	url = https://github.com/MIT-SPARK/Kimera-VIO-ROS2.git
 [submodule "ros1_ws/src/VINS-Mono"]
 	path = ros1_ws/src/VINS-Mono
 	url = https://github.com/maple5717/VINS-Mono
