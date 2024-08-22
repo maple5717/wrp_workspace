@@ -42,9 +42,9 @@ def generate_launch_description():
                 'depth_module.emitter_enabled': 'false', #
                 'depth_module.emitter_always_on': 'false', #
                 'initial_reset': 'true',
-                'depth_module.depth_profile': '640x480x15',
-                'depth_module.infra_profile': '640x480x15', 
-                'rgb_camera.color_profile': '640x480x15', 
+                'depth_module.depth_profile': '640x480x30',
+                'depth_module.infra_profile': '640x480x30', 
+                'rgb_camera.color_profile': '640x480x30', 
                 'rgb_camera.power_line_frequency': '1'
             }.items()
         ),
