@@ -26,3 +26,9 @@
 [submodule "ros1_ws/src/VINS-Mono"]
 	path = ros1_ws/src/VINS-Mono
 	url = https://github.com/maple5717/VINS-Mono
+[submodule "ros1_ws/src/Kimera-VIO-ROS"]
+	path = ros1_ws/src/Kimera-VIO-ROS
+	url = https://github.com/MIT-SPARK/Kimera-VIO-ROS.git
+[submodule "ros1_ws/src/kimera/Kimera-VIO-ROS"]
+	path = ros1_ws/src/kimera/Kimera-VIO-ROS
+	url = https://github.com/MIT-SPARK/Kimera-VIO-ROS.git

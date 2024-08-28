@@ -111,6 +111,12 @@ To save the map, run
 ```
 ros2 run nav2_map_server map_saver_cli -t /map -f ssi --ros-args -p save_map_timeout:=100
 ```
+
+### Record Topics (ROS1) ###
+```
+rosbag record -O test_d435i /camera/camera/color/image_raw /camera/camera/aligned_depth_to_color/image_raw  /vins_estimator/odometry 
+```
+
 ## Potential Problems ##
 If you meet the QOS problem when subscribing to the imu data, please refer to the solution in [this link](https://github.com/IntelRealSense/realsense-ros/issues/3033#issuecomment-1983139591)
 
