@@ -116,13 +116,15 @@ ros2 run nav2_map_server map_saver_cli -t /map -f ssi --ros-args -p save_map_tim
 ```
 rosbag record -O test_d435i /camera/camera/color/image_raw /camera/camera/aligned_depth_to_color/image_raw  /vins_estimator/odometry 
 ```
+rosbag record -O test_hector_d435i /camera/camera/color/image_raw /camera/camera/aligned_depth_to_color/image_raw /tf /tf_static
 
 ## Potential Problems ##
 If you meet the QOS problem when subscribing to the imu data, please refer to the solution in [this link](https://github.com/IntelRealSense/realsense-ros/issues/3033#issuecomment-1983139591)
 
-
-
-
+Library not found
+```
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/clearlab/wrp_workspace/src/vio/ORB-SLAM3-STEREO-FIXED/lib
+```
 
 
 
