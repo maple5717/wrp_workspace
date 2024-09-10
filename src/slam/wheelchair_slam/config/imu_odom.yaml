@@ -33,30 +33,28 @@ ekf_node:
     # imu_queue_size: 1
 
     # No odometry configuration
-    odom0: "/vins_estimator/odometry" # "/kimera_vio_ros/odometry"  
-    odom0_config: [true, true, false,  # x, y, z
+    vio0: "/vins_estimator/odometry" # "/kimera_vio_ros/odometry"  
+    vio0_config: [true, true, false,  # x, y, z
                   false, false, true,     # roll ,pitch, yaw
                   true, true, false,    # x', y', z'
                   false, false, true,    # roll' ,pitch', yaw'
+                  false, false, false,  # x'', y'', z''
+                  ]
+    vio0_nodelay: true
+    vio0_pose_rejection_threshold: 5.
+    vio0_twist_rejection_threshold: 1.
+
+    odom0: "/hector_out_pose" # "/kimera_vio_ros/odometry"  
+    odom0_config: [true, true, false,  # x, y, z
+                  false, false, true,     # roll ,pitch, yaw
+                  false, false, false,    # x', y', z'
+                  false, false, false,    # roll' ,pitch', yaw'
                   false, false, false,  # x'', y'', z''
                   ]
     odom0_nodelay: true
     odom0_pose_rejection_threshold: 5.
     odom0_twist_rejection_threshold: 1.
 
-    # Process noise parameters (these may need tuning for your robot)
-    process_noise_covariance: [1e-5, 1e-5, 1e-5,  # Noise for x, y, and yaw
-                               1e-5, 1e-5, 1e-5, 
-                               1e-5, 1e-5, 1e-5,
-                               1e-5, 1e-5, 1e-5, 
-                               1e-5, 1e-5, 1e-5]
-
-    # Measurement noise parameters (these may need tuning for your sensors)
-    measurement_noise_covariance: [1e-5, 1e-5, 1e-5,  # Noise for x, y, and yaw
-                                    1e-5, 1e-5, 1e-5, 
-                                    1e-5, 1e-5, 1e-5,
-                                    1e-5, 1e-5, 1e-5, 
-                                    1e-5, 1e-5, 1e-5]
 
 
 

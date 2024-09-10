@@ -10,12 +10,12 @@
 # 	path = src/wr_arm_ros2
 # 	url = https://github.com/westonrobot/wr_arm_ros2.git
 # 	branch = humble
-# [submodule "src/slam/ORB-SLAM3-STEREO-FIXED"]
-# 	path = src/slam/ORB-SLAM3-STEREO-FIXED
-# 	url = https://github.com/zang09/ORB-SLAM3-STEREO-FIXED.git
-# [submodule "src/slam/orbslam3_ros2"]
-# 	path = src/slam/orbslam3_ros2
-# 	url = https://github.com/maple5717/orbslam3_ros2.git
+[submodule "src/slam/ORB-SLAM3-STEREO-FIXED"]
+	path = src/slam/ORB-SLAM3-STEREO-FIXED
+	url = https://github.com/zang09/ORB-SLAM3-STEREO-FIXED.git
+[submodule "src/slam/orbslam3_ros2"]
+	path = src/slam/orbslam3_ros2
+	url = https://github.com/maple5717/orbslam3_ros2.git
 [submodule "src/peripheral/realsense-ros"]
 	path = src/peripheral/realsense-ros
 	url = https://github.com/IntelRealSense/realsense-ros.git
@@ -23,15 +23,15 @@
 # [submodule "src/vio/Kimera-VIO-ROS2"]
 # 	path = src/vio/Kimera-VIO-ROS2
 # 	url = https://github.com/MIT-SPARK/Kimera-VIO-ROS2.git
-[submodule "ros1_ws/src/VINS-Mono"]
-	path = ros1_ws/src/VINS-Mono
-	url = https://github.com/maple5717/VINS-Mono
-[submodule "ros1_ws/src/Kimera-VIO-ROS"]
-	path = ros1_ws/src/Kimera-VIO-ROS
-	url = https://github.com/MIT-SPARK/Kimera-VIO-ROS.git
-[submodule "ros1_ws/src/kimera/Kimera-VIO-ROS"]
-	path = ros1_ws/src/kimera/Kimera-VIO-ROS
-	url = https://github.com/MIT-SPARK/Kimera-VIO-ROS.git
+# [submodule "ros1_ws/src/VINS-Mono"]
+# 	path = ros1_ws/src/VINS-Mono
+# 	url = https://github.com/maple5717/VINS-Mono
+# [submodule "ros1_ws/src/Kimera-VIO-ROS"]
+# 	path = ros1_ws/src/Kimera-VIO-ROS
+# 	url = https://github.com/MIT-SPARK/Kimera-VIO-ROS.git
+# [submodule "ros1_ws/src/kimera/Kimera-VIO-ROS"]
+# 	path = ros1_ws/src/kimera/Kimera-VIO-ROS
+	# url = https://github.com/MIT-SPARK/Kimera-VIO-ROS.git
 [submodule "src/vio/odom_transformer"]
 	path = src/vio/odom_transformer
 	url = https://github.com/Karelics/odom_transformer.git

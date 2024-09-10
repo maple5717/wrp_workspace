@@ -11,11 +11,11 @@ def get_intrinsics():
     
     # names = ["color", "depth", "infra"]
     stream_type = [rs.stream.color, rs.stream.depth, rs.stream.infrared]
-    stream_type = [rs.stream.depth]
+    stream_type = [rs.stream.color]
 
     for t in stream_type:
         print(t)
-        config.enable_stream(t, 640, 480, rs.format.z16, 30)
+        config.enable_stream(t, 640, 480, rs.format.rgb8, 30) #z16
         # Start streaming
         pipeline.start(config)
     

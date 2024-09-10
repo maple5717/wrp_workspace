@@ -33,17 +33,22 @@ def generate_launch_description():
             PythonLaunchDescriptionSource(join(realsense2_share_dir, 'launch/rs_launch.py')),
             launch_arguments={
                 'unite_imu_method': '1',
-                # 'align_depth.enable': 'true',
+                'align_depth.enable': 'true',
                 'enable_accel': 'true',
                 'enable_gyro': 'true',
-                'enable_infra1': 'true',
-                'enable_infra2': 'true', 
-                'enable_depth': 'false',  #
-                'depth_module.emitter_enabled': 'false', #
-                'depth_module.emitter_always_on': 'false', #
+                'enable_sync': 'true',
+                # 'enable_infra1': 'true',
+                # 'enable_infra2': 'true', 
+                'enable_depth': 'true',  #
+                'pointcloud.enable': 'true',
+                'depth_module.global_time_enabled': 'true',
+                'rgb_camera.global_time_enabled': 'true',
+                'tf_publish_rate': '1.0',
+                # 'depth_module.emitter_enabled': 'false', #
+                # 'depth_module.emitter_always_on': 'false', #
                 'initial_reset': 'true',
                 'depth_module.depth_profile': '640x480x30',
-                'depth_module.infra_profile': '640x480x30', 
+                # 'depth_module.infra_profile': '640x480x30', 
                 'rgb_camera.color_profile': '640x480x30', 
                 'rgb_camera.power_line_frequency': '1'
             }.items()

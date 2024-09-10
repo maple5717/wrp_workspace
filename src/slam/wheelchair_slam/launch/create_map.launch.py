@@ -39,7 +39,7 @@ def generate_launch_description():
             package='tf2_ros',
             executable='static_transform_publisher',
             name='camera_base_tf',
-            arguments=['1.0', '0', '1.201', '0.5', '-0.5', '0.5', '-0.5', 'base_link', 'camera_link'],
+            arguments=['0', '0', '0', '0', '0', '0', '1', 'base_link', 'camera_color_optical_frame'],
             # output='screen',
         )
     lidar_base_tf = Node(
@@ -86,7 +86,7 @@ def generate_launch_description():
         ) 
 
 
-    # pkg_cartographer_ros = FindPackageShare('cartographer_ros').find('cartographer_ros')
+    pkg_cartographer_ros = FindPackageShare('cartographer_ros').find('cartographer_ros')
     config_dir = os.path.join(
         get_package_share_directory('wheelchair_slam'),
         'config',
@@ -104,7 +104,7 @@ def generate_launch_description():
             # ('/odom', '/mobile_base_node/odom')
             # ('/odom', '/kimera_vio_ros/odometry')
             # ('/odom', '/vins_estimator/odometry')
-            ('/odom', '/odometry/filtered')
+            ('/odom', '/transformed_odom')
             ],
         output = 'screen'
         )
@@ -154,7 +154,7 @@ def generate_launch_description():
     )
 
     wheelchair_slam_share_dir = FindPackageShare('wheelchair_slam').find('wheelchair_slam')
-    ekf_config_file = str(wheelchair_slam_share_dir) + '/config/imu_odom.yaml'
+    ekf_config_file = str(wheelchair_slam_share_dir) + '/config/orb3_odom.yaml'
     ekf = Node(
             package='robot_localization',
             executable='ekf_node',
@@ -164,6 +164,27 @@ def generate_launch_description():
         
         )
 
+    transformer_config_path = os.path.join(wheelchair_slam_share_dir, "config", "odom_transformer_params.yaml")
+
+    odom_transformer = Node(
+        package="odom_transformer",
+        executable="transformer_node.py",
+        name="odom_transformer",
+        output={"both": {"screen", "log", "own_log"}},
+        parameters=[transformer_config_path],
+    )
+
+    odom2tf = Node(
+        package="odom_to_tf_ros2",
+        executable="odom_to_tf",
+        name="odom_to_tf",
+        output={"both": {"screen", "log", "own_log"}},
+        parameters=[{
+                'frame_id': 'odom',        
+                'child_frame_id': 'base_link',   
+                'odom_topic': '/transformed_odom'             
+            }]
+    )
 
     ld = LaunchDescription()
 
@@ -171,15 +192,17 @@ def generate_launch_description():
     # ld.add_action(start_sync_slam_toolbox_node)
     # ld.add_action(base_tf)
     # ld.add_action(odom_tf)
-    # ld.add_action(camera_base_tf)
+    ld.add_action(camera_base_tf)
     # ld.add_action(lidar_base_tf)
     # ld.add_action(fake_tf_publisher)
 
     # ld.add_action(pointcloud_to_laserscan)
-    # ld.add_action(cartographer_node)
-    # ld.add_action(cartographer_occupancy_grid_node)
+    ld.add_action(cartographer_node)
+    ld.add_action(cartographer_occupancy_grid_node)
 
     ld.add_action(rviz_node)
     ld.add_action(robot_state_publisher)
+    ld.add_action(odom_transformer)
+    ld.add_action(odom2tf)
     # ld.add_action(ekf)
     return ld

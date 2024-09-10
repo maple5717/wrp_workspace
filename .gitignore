@@ -10,3 +10,10 @@ sample_data*
 *.txt
 ros1_ws/devel/
 ros1_ws/build/
+ros1_ws/.catkin_tools/
+ros1_ws/logs/
+*.log
+*.bag
+*.db3*
+.catkin_workspace
+.rosinstall

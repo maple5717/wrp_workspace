@@ -1,0 +1,11 @@
+odom_transformer:
+  ros__parameters:
+    base_frame: base_link
+
+    odoms_to_transform: ["realsense"]
+
+    realsense:
+      topic_in: /odometry
+      source_frame: camera_color_optical_frame
+      topic_out: /transformed_odom
+
