@@ -32,3 +32,9 @@
 [submodule "ros1_ws/src/kimera/Kimera-VIO-ROS"]
 	path = ros1_ws/src/kimera/Kimera-VIO-ROS
 	url = https://github.com/MIT-SPARK/Kimera-VIO-ROS.git
+[submodule "src/vio/odom_transformer"]
+	path = src/vio/odom_transformer
+	url = https://github.com/Karelics/odom_transformer.git
+[submodule "src/vio/odom_to_tf_ros2"]
+	path = src/vio/odom_to_tf_ros2
+	url = https://github.com/gstavrinos/odom_to_tf_ros2.git
