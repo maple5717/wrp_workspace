@@ -7,7 +7,6 @@ sample_data*
 *.gv
 .vscode/
 *.so*
-*.txt
 ros1_ws/devel/
 ros1_ws/build/
 ros1_ws/.catkin_tools/

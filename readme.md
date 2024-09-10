@@ -34,10 +34,10 @@ Please make sure the [librealsense](https://github.com/IntelRealSense/librealsen
 sudo apt install ros-noetic-gmapping
 ```
 
-### VIO (ROS1) ###
-In this project, we use the HKUST VINS-Mono VIO. Please follow the guidance in this [forked repository](https://github.com/maple5717/VINS-Mono) to build up the dependencies. 
+<!-- ### VIO (ROS1) ###
+In this project, we use the HKUST VINS-Mono VIO. Please follow the guidance in this [forked repository](https://github.com/maple5717/VINS-Mono) to build up the dependencies.  -->
 
-<!-- ### ORB-SLAM3 (ROS2) ###
+### ORB-SLAM3 (ROS2) ###
  Install epoxy
 ```
 sudo apt-get install libepoxy-dev
@@ -51,7 +51,7 @@ Install g20
 ```
 sudo apt-get install ros-humble-libg2o
 ```
-Install orbslam following the instructions from the original [ORB_SLAM3_ROS2 repository](github.com/zang09/ORB_SLAM3_ROS2). **Do not forget to correctly set ORB_SLAM3_ROOT_DIR** -->
+Install orbslam following the instructions from the original [ORB_SLAM3_ROS2 repository](github.com/zang09/ORB_SLAM3_ROS2). **Do not forget to correctly set ORB_SLAM3_ROOT_DIR**
 
 
 
