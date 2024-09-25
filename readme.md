@@ -96,6 +96,12 @@ To navigate, run
 ros2 launch wrp_nav wheelchair_nav.launch.py 
 ```
 
+If orbslam is slow, adjust its priority
+```
+ps -aux | grep orb
+sudo renice -n -20 -p <pid>
+```
+
 ### ROS1 nodes ###
 In one terminal, start the ros1 bridge 
 ```
