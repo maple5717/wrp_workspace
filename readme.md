@@ -83,13 +83,18 @@ ros2 launch realsense2_camera rs_launch.py   unite_imu_method:=2 align_depth.ena
 ```
 ros2 launch wheelchair_slam realsense_start.launch.py
 ```
-In another terminal, launch the slam node
+In another terminal, launch the mapping node
 ```
 ros2 launch wheelchair_slam create_map.launch.py
 ```
-<!-- ```
-ros2 run orbslam3 rgbd src/slam/orbslam3_ros2/vocabulary/ORBvoc.txt src/slam/orbslam3_ros2/config/rgb-d/RealSense_D435i.yaml 
-``` -->
+Launch the orbslam node together with odom_tf node
+```
+ros2 launch wheelchair_slam orbslam_start.launch.py
+```
+To navigate, run
+```
+ros2 launch wrp_nav wheelchair_nav.launch.py 
+```
 
 ### ROS1 nodes ###
 In one terminal, start the ros1 bridge 
