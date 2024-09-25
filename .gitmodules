@@ -38,3 +38,7 @@
 [submodule "src/vio/odom_to_tf_ros2"]
 	path = src/vio/odom_to_tf_ros2
 	url = https://github.com/gstavrinos/odom_to_tf_ros2.git
+[submodule "src/slam/depthimage_to_laserscan"]
+	path = src/slam/depthimage_to_laserscan
+	url = https://github.com/ros-perception/depthimage_to_laserscan.git
+	branch = ros2
