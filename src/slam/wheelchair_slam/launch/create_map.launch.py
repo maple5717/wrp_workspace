@@ -5,6 +5,8 @@ from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 from launch_ros.substitutions import FindPackageShare
 import os
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 def generate_launch_description():
     # use_sim_time = LaunchConfiguration('use_sim_time')
@@ -27,12 +29,12 @@ def generate_launch_description():
     #         output='screen',
     #     )
     
-    # odom_tf = Node(
-    #         package='tf2_ros',
-    #         executable='static_transform_publisher',
-    #         arguments=['0', '0', '0', '0', '0', '0', '1', 'map', 'odom'],
-    #         output='screen',
-    #     )
+    map_odom_tf = Node(
+            package='tf2_ros',
+            executable='static_transform_publisher',
+            arguments=['0', '0', '0', '0', '0', '0', '1', 'map', 'odom'],
+            output='screen',
+        )
 
     
     camera_base_tf = Node(
@@ -65,26 +67,60 @@ def generate_launch_description():
             package='pointcloud_to_laserscan', 
             executable='pointcloud_to_laserscan_node',
             remappings=[
-                ('cloud_in', 'rslidar_points'),
+                ('cloud_in', 'camera/camera/depth/color/points'),
                 # ('scan', ['scanner', '/scan'])
                         ],
             parameters=[{
-                'target_frame': 'rslidar',
+                'target_frame': 'camera_link',
                 'transform_tolerance': 0.01,
-                'min_height': 0.0,
-                'max_height': 2.0,
+                'min_height': -1.1,
+                'max_height': 0.0,
                 'angle_min': -3.1416,  # -M_PI/2
                 'angle_max': 3.1416,  # M_PI/2
                 'angle_increment': 0.0087,  # M_PI/360.0
                 'scan_time': 0.1,
                 'range_min': 0.2,
-                'range_max': 100.0,
+                'range_max': 5.0,
                 'use_inf': True,
                 'inf_epsilon': 1.0
             }],
             name='pointcloud_to_laserscan'
         ) 
+    
+    depth_to_scan = Node(
+            package='depthimage_to_laserscan',
+            executable='depthimage_to_laserscan_node',
+            name='depthimage_to_laserscan',
+            remappings=[('depth', '/camera/camera/depth/image_rect_raw'),
+                        ('depth_camera_info', '/camera/camera/depth/camera_info')],
+            parameters=[{
+                'output_frame': 'camera_depth_optical_frame'
+            }])
 
+    rgbd_to_laserscan = Node(
+            package='depthimage_to_laserscan', 
+            executable='depthimage_to_laserscan_node',
+            remappings=[
+                ('depth', '/camera/camera/aligned_depth_to_color/image_raw'),
+                ('depth_camera_info', '/camera/camera/aligned_depth_to_color/camera_info')
+                        ],
+            parameters=[{
+                'output_frame': 'camera_link',
+                # 'transform_tolerance': 0.01,
+                # 'min_height': -1.1,
+                # 'max_height': 0.0,
+                # 'angle_min': -3.1416,  # -M_PI/2
+                # 'angle_max': 3.1416,  # M_PI/2
+                # 'angle_increment': 0.0087,  # M_PI/360.0
+                'scan_height': 0,
+                'scan_time': 1/30,
+                'range_min': 0.0,
+                'range_max': 10.0,
+                # 'use_inf': True,
+                # 'inf_epsilon': 1.0
+            }],
+            name='rgbd_to_laserscan'
+        ) 
 
     pkg_cartographer_ros = FindPackageShare('cartographer_ros').find('cartographer_ros')
     config_dir = os.path.join(
@@ -116,6 +152,16 @@ def generate_launch_description():
             {'use_sim_time': False},
             {'resolution': 0.05}],
         )
+    
+    slam_toolbox_launch_dir = get_package_share_directory('wheelchair_slam') + '/launch/'
+    slam_toolbox_node = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([
+                slam_toolbox_launch_dir + 'slam_toolbox_online_async.py'
+            ]),
+        )
+
+
+
 
     # amcl = Node(   
     #     package='nav2_map_server',
@@ -192,17 +238,19 @@ def generate_launch_description():
     # ld.add_action(start_sync_slam_toolbox_node)
     # ld.add_action(base_tf)
     # ld.add_action(odom_tf)
-    ld.add_action(camera_base_tf)
+    # ld.add_action(camera_base_tf)
     # ld.add_action(lidar_base_tf)
     # ld.add_action(fake_tf_publisher)
 
-    # ld.add_action(pointcloud_to_laserscan)
-    ld.add_action(cartographer_node)
-    ld.add_action(cartographer_occupancy_grid_node)
+    ld.add_action(pointcloud_to_laserscan)
+    ld.add_action(map_odom_tf)
+    # ld.add_action(cartographer_node)
+    # ld.add_action(cartographer_occupancy_grid_node)
+    # ld.add_action(slam_toolbox_node)
 
     ld.add_action(rviz_node)
     ld.add_action(robot_state_publisher)
-    ld.add_action(odom_transformer)
-    ld.add_action(odom2tf)
+    # ld.add_action(odom_transformer)
+    # ld.add_action(odom2tf)
     # ld.add_action(ekf)
     return ld

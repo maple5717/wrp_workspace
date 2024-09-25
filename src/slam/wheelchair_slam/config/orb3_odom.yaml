@@ -1,137 +1,98 @@
-ekf_node:
-  ros__parameters:
-    # Frame IDs
-    odom_frame: "odom"
-    # map_frame: "odom"
-    base_link_frame: "base_link"
-    # imu_frame: "camera_imu_optical_frame"
+%YAML:1.0
 
-    # Sensor data sources
-    use_sim_time: false
-    publish_tf: true
-    publish_acceleration: false
+#--------------------------------------------------------------------------------------------
+# Camera Parameters. Adjust them!
+#--------------------------------------------------------------------------------------------
+Camera.type: "PinHole"
 
-    two_d_mode: true
-    frequency: 30.0
-    sensor_timeout: 0.1
-
-    # IMU configuration
-    # imu0: "/camera/camera/imu"  # The topic for IMU data
-    # imu0_config: [false, false, false,  # x, y, z
-    #               false, false, true,     # roll ,pitch, yaw
-    #               false, false, false,    # x', y', z'
-    #               false, false, true,    # roll' ,pitch', yaw'
-    #               true, true, false,  # x'', y'', z''
-    #               ]
-    # imu0_config: [false, false, false,    # x, y, z
-    #               false, false, false,     # roll ,pitch, yaw
-    #               false, false, false,    # x', y', z'
-    #               true, true, true,    # roll' ,pitch', yaw'
-    #               false, false, false,  # x'', y'', z''
-    #               ]
-
-    # imu_queue_size: 1
-
-    # No odometry configuration
-    odom0: "/transformed_odom" # "/kimera_vio_ros/odometry"  
-    odom0_config: [true, true, false,  # x, y, z
-                  false, false, true,     # roll ,pitch, yaw
-                  false, false, false,    # x', y', z'
-                  false, false, false,    # roll' ,pitch', yaw'
-                  false, false, false,  # x'', y'', z''
-                  ]
-    odom0_nodelay: true
-    odom0_pose_rejection_threshold: 0.5
-    odom0_twist_rejection_threshold: 0.1
-    odom0_relative: true
-
-    odom1: "/hector_out_pose" # "/kimera_vio_ros/odometry"  
-    odom1_config: [true, true, false,  # x, y, z
-                  false, false, true,     # roll ,pitch, yaw
-                  false, false, false,    # x', y', z'
-                  false, false, false,    # roll' ,pitch', yaw'
-                  false, false, false,  # x'', y'', z''
-                  ]
-    odom1_nodelay: true
-    odom1_pose_rejection_threshold: 0.5
-    odom1_twist_rejection_threshold: 0.1
-    odom1_differential: false
-    odom1_relative: true
-
-    # # Process noise parameters (these may need tuning for your robot)
-    # process_noise_covariance: [1.00e-05, 1.00e-05, 1.00e-05,  # Noise for x, y, and yaw
-    #                            1.00e-05, 1.00e-05, 1.00e-05, 
-    #                            1.00e-05, 1.00e-05, 1.00e-05,
-    #                            1.00e-05, 1.00e-05, 1.00e-05, 
-    #                            1.00e-05, 1.00e-05, 1.00e-05]
-
-    # # Measurement noise parameters (these may need tuning for your sensors)
-    # measurement_noise_covariance: [1.00e-05, 1.00e-05, 1.00e-05,  # Noise for x, y, and yaw
-    #                                 1.00e-05, 1.00e-05, 1.00e-05, 
-    #                                 1.00e-05, 1.00e-05, 1.00e-05,
-    #                                 1.00e-05, 1.00e-05, 1.00e-05, 
-    #                                 1.00e-05, 1.00e-05, 1.00e-05]
+# Right Camera calibration and distortion parameters (OpenCV)
+Camera.fx: 605.2938232421875
+Camera.fy: 605.2938232421875
+Camera.cx: 316.6695556640625  
+Camera.cy: 236.89938354492188
 
 
+# distortion parameters
+Camera.k1: 0.0
+Camera.k2: 0.0
+Camera.p1: 0.0
+Camera.p2: 0.0
 
+# Camera resolution
+Camera.width: 640
+Camera.height: 480
 
-    # No odometry configuration
-    # odom0: ""  
-    # odom0_config: []
+# Camera frames per second 
+Camera.fps: 15.0
 
-    # Process noise parameters (these may need tuning for your robot)
-    # process_noise_covariance: [1.00e-05, 1.00e-05, 1.00e-05,  # Noise for x, y, and yaw
-    #                            1.00e-05, 1.00e-05, 1.00e-05, 
-    #                            1.00e-05, 1.00e-05, 1.00e-05,
-    #                            1.00e-05, 1.00e-05, 1.00e-05, 
-    #                            1.00e-05, 1.00e-05, 1.00e-05]
+# Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
+Camera.RGB: 1
 
-    # Measurement noise parameters (these may need tuning for your sensors)
-    #                               x,         y,          z,           raw,      pitch,      yaw,          x',         y',           z'        raw'          pitch'      yaw'        x''         y''
-    measurement_noise_covariance: [ 2.50e-07,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                    0.00e-00,   2.50e-07,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                    0.00e-00,   0.00e-00,   1.00e-05,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                    0.00e-00,   0.00e-00,   0.00e-00,   1.00e-04,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   1.00e-05,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   1.00e-04,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   1.00e-05,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    1.00e-05,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    1.00e-05,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   1.00e-05,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   1.00e-05,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   1.00e-07,   0.00e-00,   0.00e-00,   0.00e-00,
-                                    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   1.00e-05,   0.00e-00,   0.00e-00,
-                                    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   1.00e-05,   0.00e-00,
-                                    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   1.00e-05]
-    #                              x,         y,          z,           raw,      pitch,      yaw,          x',         y',           z'        raw'          pitch'      yaw'        x''         y''  
-    process_noise_covariance: [1.5625e+01, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 6.2500e+02, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 1.2500e+04, 0.0000e+00, 0.0000e+00, 
-0.0000e+00, 1.5625e+01, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 6.2500e+02, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 1.2500e+04, 0.0000e+00, 
-0.0000e+00, 0.0000e+00, 3.1400e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 
-0.0000e+00, 0.0000e+00, 0.0000e+00, 3.1400e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 
-0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 3.1400e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 
-0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 1.5625e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 6.2500e+01, 0.0000e+00, 0.0000e+00, 0.0000e+00, 
-6.2500e+02, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 2.5000e+04, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 5.0000e+05, 0.0000e+00, 0.0000e+00, 
-0.0000e+00, 6.2500e+02, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 2.5000e+04, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 5.0000e+05, 0.0000e+00, 
-0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 3.1400e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 
-0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 3.1400e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 
-0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 3.1400e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 
-0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 6.2500e+01, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 2.5000e+03, 0.0000e+00, 0.0000e+00, 0.0000e+00, 
-1.2500e+04, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 5.0000e+05, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e+07, 0.0000e+00, 0.0000e+00, 
-0.0000e+00, 1.2500e+04, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 5.0000e+05, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 1.0000e+07, 0.0000e+00, 
-0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 0.0000e+00, 3.1400e+00]
+# Image scale, it changes the image size to be processed (<1.0: reduce, >1.0: increase)
+# Camera.imageScale: 0.5 # 0.5 #0.7071 # 1/sqrt(2)
 
-    initial_estimate_covariance: [2.00e+01,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                  0.00e-00,   2.00e+01,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                  0.00e-00,   0.00e-00,   1.00e-05,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                  0.00e-00,   0.00e-00,   0.00e-00,   1.00e-05,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                  0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   1.00e-05,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                  0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   2.00e+01,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                  0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   1.00e-05,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                  0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    1.00e-05,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                  0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    1.00e-05,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                  0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   1.00e-05,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                  0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   1.00e-05,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,
-                                  0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   1.00e-05,   0.00e-00,   0.00e-00,   0.00e-00,
-                                  0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   1.00e-05,   0.00e-00,   0.00e-00,
-                                  0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   1.00e-05,   0.00e-00,
-                                  0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,    0.00e-00,    0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   0.00e-00,   1.00e-05]
+# Close/Far threshold. Baseline times.
+ThDepth: 40.0
+
+# stereo baseline times fx
+Camera.bf: 46.01
+
+# Deptmap values factor
+DepthMapFactor: 1000.0
+
+# Transformation from body-frame (imu) to left camera
+Tbc: !!opencv-matrix
+   rows: 4
+   cols: 4
+   dt: f
+   data: [  0.999947,        -0.00779459,      -0.00668475 ,  -0.0202622599899769 
+            0.00778739,       0.999969,        -0.00110219,    0.00487191276624799
+            0.00669314,       0.00105007,       0.999977, 0.0116125149652362  
+            0,0,0,1]
+      # [1,0,0,-0.012,
+      #    0,1,0,-0.006,
+      #    0,0,1,0.005,
+      #    0.0, 0.0, 0.0, 1.0]
+
+# Do not insert KFs when recently lost
+InsertKFsWhenLost: 0
+
+# IMU noise (Use those from VINS-mono)
+IMU.NoiseGyro: 4.4092381657107440e-03 # 2.44e-4 #1e-3 # rad/s^0.5
+IMU.NoiseAcc: 1.9203435687181320e-02 # 1.47e-3 #1e-2 # m/s^1.5
+IMU.GyroWalk: 5.2122195707954007e-05 # rad/s^1.5
+IMU.AccWalk: 5.7008549018960453e-04 # m/s^2.5
+IMU.Frequency: 200
+
+#--------------------------------------------------------------------------------------------
+# ORB Parameters
+#--------------------------------------------------------------------------------------------
+# ORB Extractor: Number of features per image
+ORBextractor.nFeatures: 1250
+
+# ORB Extractor: Scale factor between levels in the scale pyramid 	
+ORBextractor.scaleFactor: 1.2
+
+# ORB Extractor: Number of levels in the scale pyramid	
+ORBextractor.nLevels: 8
+
+# ORB Extractor: Fast threshold
+# Image is divided in a grid. At each cell FAST are extracted imposing a minimum response.
+# Firstly we impose iniThFAST. If no corners are detected we impose a lower value minThFAST
+# You can lower these values if your images have low contrast			
+ORBextractor.iniThFAST: 20
+ORBextractor.minThFAST: 7
+
+#--------------------------------------------------------------------------------------------
+# Viewer Parameters
+#--------------------------------------------------------------------------------------------
+Viewer.KeyFrameSize: 0.05
+Viewer.KeyFrameLineWidth: 1
+Viewer.GraphLineWidth: 0.9
+Viewer.PointSize: 2
+Viewer.CameraSize: 0.08
+Viewer.CameraLineWidth: 3
+Viewer.ViewpointX: 0
+Viewer.ViewpointY: -0.7
+Viewer.ViewpointZ: -3.5
+Viewer.ViewpointF: 500

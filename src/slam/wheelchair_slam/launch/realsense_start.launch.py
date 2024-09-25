@@ -40,16 +40,18 @@ def generate_launch_description():
                 # 'enable_infra1': 'true',
                 # 'enable_infra2': 'true', 
                 'enable_depth': 'true',  #
-                'pointcloud.enable': 'true',
                 'depth_module.global_time_enabled': 'true',
                 'rgb_camera.global_time_enabled': 'true',
                 'tf_publish_rate': '1.0',
+                'pointcloud.enable': 'true',
+                'pointcloud.allow_no_texture_points': 'true',
+                # 'pointcloud.ordered_pc': 'true',
                 # 'depth_module.emitter_enabled': 'false', #
                 # 'depth_module.emitter_always_on': 'false', #
                 'initial_reset': 'true',
-                'depth_module.depth_profile': '640x480x30',
+                'depth_module.depth_profile': '640x480x15',
                 # 'depth_module.infra_profile': '640x480x30', 
-                'rgb_camera.color_profile': '640x480x30', 
+                'rgb_camera.color_profile': '640x480x15', 
                 'rgb_camera.power_line_frequency': '1'
             }.items()
         ),
