@@ -243,10 +243,10 @@ def generate_launch_description():
     # ld.add_action(fake_tf_publisher)
 
     ld.add_action(pointcloud_to_laserscan)
-    ld.add_action(map_odom_tf)
+    # ld.add_action(map_odom_tf)
     # ld.add_action(cartographer_node)
     # ld.add_action(cartographer_occupancy_grid_node)
-    # ld.add_action(slam_toolbox_node)
+    ld.add_action(slam_toolbox_node)
 
     ld.add_action(rviz_node)
     ld.add_action(robot_state_publisher)
