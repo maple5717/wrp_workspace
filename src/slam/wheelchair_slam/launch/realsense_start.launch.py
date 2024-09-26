@@ -44,7 +44,7 @@ def generate_launch_description():
                 'rgb_camera.global_time_enabled': 'true',
                 'tf_publish_rate': '1.0',
                 'pointcloud.enable': 'true',
-                'pointcloud.allow_no_texture_points': 'true',
+                'pointcloud.allow_no_texture_points': 'false',
                 # 'pointcloud.ordered_pc': 'true',
                 # 'depth_module.emitter_enabled': 'false', #
                 # 'depth_module.emitter_always_on': 'false', #
