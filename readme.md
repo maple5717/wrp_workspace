@@ -74,7 +74,7 @@ source devel/setup.bash # optional
 ## Usage ##
 <!-- ### Camera intrinsics setup ###
 <!-- Please set up the camera intrinsics in ```src/slam/wheelchair_slam/config/RealSense_D435i.yaml``` -->
-Set up the intrinsics file in ```ros1_ws/src/VINS-Mono/config/realsense``` -->
+<!-- Set up the intrinsics file in ```ros1_ws/src/VINS-Mono/config/realsense``` -->
 
 
 ### Navigtion ###
