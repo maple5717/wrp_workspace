@@ -17,22 +17,23 @@ cd wrp_workspace
 ### Nav2 & cartographer (ROS2) ###
 <!-- Please refer to the [installation guide](https://docs.nav2.org/getting_started/index.html) -->
 ```
-sudo apt install ros-humble-navigation2
-sudo apt install ros-humble-nav2-bringup
-sudo apt install ros-humble-cartographer
-sudo apt install ros-humble-cartographer-ros
+sudo apt install ros-humble-nav2*
 ```
-install Cartographer using [this link](https://ros2-industrial-workshop.readthedocs.io/en/latest/_source/navigation/ROS2-Cartographer.html)
+<!-- sudo apt install ros-humble-nav2-bringup
+sudo apt install ros-humble-cartographer
+sudo apt install ros-humble-cartographer-ros -->
+
+<!-- install Cartographer using [this link](https://ros2-industrial-workshop.readthedocs.io/en/latest/_source/navigation/ROS2-Cartographer.html) -->
 
 
 ### RealSense (ROS2) ###
 Please make sure the [librealsense](https://github.com/IntelRealSense/librealsense) is installed and the package ```realsense-ros``` is cloned to ```src/camera```
 ...
 
-### gmapping (ROS1) ###
+<!-- ### gmapping (ROS1) ###
 ```
 sudo apt install ros-noetic-gmapping
-```
+``` -->
 
 <!-- ### VIO (ROS1) ###
 In this project, we use the HKUST VINS-Mono VIO. Please follow the guidance in this [forked repository](https://github.com/maple5717/VINS-Mono) to build up the dependencies.  -->
@@ -61,21 +62,21 @@ colcon build --symlink-install
 source install/setup.bash # optional
 ```
 
-Build the ROS1 project 
+<!-- Build the ROS1 project 
 ```
 cd ros1_ws
 catkin build
 source devel/setup.bash # optional
-```
+``` -->
 
 
 ## Usage ##
-### Camera intrinsics setup ###
+<!-- ### Camera intrinsics setup ###
 <!-- Please set up the camera intrinsics in ```src/slam/wheelchair_slam/config/RealSense_D435i.yaml``` -->
-Set up the intrinsics file in ```ros1_ws/src/VINS-Mono/config/realsense```
+Set up the intrinsics file in ```ros1_ws/src/VINS-Mono/config/realsense``` -->
 
 
-### ROS2 nodes ###
+### Navigtion ###
 In one terminal, launch realsense
 <!-- ```
 ros2 launch realsense2_camera rs_launch.py   unite_imu_method:=2 align_depth.enable:=true enable_accel:=true enable_gyro:=true 
@@ -87,7 +88,7 @@ In another terminal, launch the mapping node
 ```
 ros2 launch wheelchair_slam create_map.launch.py
 ```
-Launch the orbslam node together with odom_tf node
+Launch the orbslam node together with odom_tf node to get odometry published at 15Hz
 ```
 ros2 launch wheelchair_slam orbslam_start.launch.py
 ```
@@ -104,7 +105,7 @@ sudo renice -n -20 -p <pid>
 
 If real-time controller is desired, follow the guidance [here](https://docs.nav2.org/configuration/packages/configuring-controller-server.html#parameters)
 
-### ROS1 nodes ###
+<!-- ### ROS1 nodes ###
 In one terminal, start the ros1 bridge 
 ```
 ros2 run ros1_bridge dynamic_bridge 
@@ -129,7 +130,7 @@ ros2 run nav2_map_server map_saver_cli -t /map -f ssi --ros-args -p save_map_tim
 ```
 rosbag record -O test_d435i /camera/camera/color/image_raw /camera/camera/aligned_depth_to_color/image_raw  /vins_estimator/odometry 
 ```
-rosbag record -O test_hector_d435i /camera/camera/color/image_raw /camera/camera/aligned_depth_to_color/image_raw /tf /tf_static
+rosbag record -O test_hector_d435i /camera/camera/color/image_raw /camera/camera/aligned_depth_to_color/image_raw /tf /tf_static -->
 
 ## Potential Problems ##
 If you meet the QOS problem when subscribing to the imu data, please refer to the solution in [this link](https://github.com/IntelRealSense/realsense-ros/issues/3033#issuecomment-1983139591)
@@ -143,6 +144,6 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/clearlab/wrp_workspace/src/vio/ORB
 
 # Notes #
 stl scale: 1/ 25.4 / 8
-add moveit_config.move_group_capabilities = {"capabilities": "move_group/ExecuteTaskSolutionCapability"} to config files
-todo: 
-1. try to run mapping and filtering in ros1
+<!-- add moveit_config.move_group_capabilities = {"capabilities": "move_group/ExecuteTaskSolutionCapability"} to config files -->
+<!-- todo: 
+1. try to run mapping and filtering in ros1 -->
