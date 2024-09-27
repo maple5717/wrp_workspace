@@ -14,7 +14,7 @@ clone this repository
 git clone --recursive https://github.com/maple5717/wrp_workspace.git
 cd wrp_workspace 
 ```
-### Nav2 & cartographer (ROS2) ###
+### Nav2 Installation ###
 <!-- Please refer to the [installation guide](https://docs.nav2.org/getting_started/index.html) -->
 ```
 sudo apt install ros-humble-nav2*
