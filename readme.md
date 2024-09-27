@@ -2,7 +2,8 @@
 Navigation support of nus-wheelchair. 
 
 ## System Requirements ##
-ROS2 installed (tested with humble and foxy)
+1. Ubuntu >= 20.04 (22.04 is preferred)
+2. ROS2 installed (tested with humble and foxy)
 
 <!-- ROS1 installed (tested with noetic)
 
