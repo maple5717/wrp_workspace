@@ -102,6 +102,8 @@ ps -aux | grep orb
 sudo renice -n -20 -p <pid>
 ```
 
+If real-time controller is desired, follow the guidance [here](https://docs.nav2.org/configuration/packages/configuring-controller-server.html#parameters)
+
 ### ROS1 nodes ###
 In one terminal, start the ros1 bridge 
 ```
