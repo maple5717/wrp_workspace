@@ -188,15 +188,15 @@ controller_server:
     #   RotateToGoal.lookahead_time: -1.0
     FollowPath:
       plugin: "nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController"
-      desired_linear_vel: 0.15
+      desired_linear_vel: 0.16
       lookahead_time: 1.5
-      rotate_to_heading_angular_vel: 0.2
+      rotate_to_heading_angular_vel: 0.65 # angular vel
       transform_tolerance: 0.1
       use_velocity_scaled_lookahead_dist: false
       lookahead_dist: 1.2
       # min_lookahead_dist: 0.3
       # max_lookahead_dist: 0.9
-      min_approach_linear_velocity: 0.05
+      min_approach_linear_velocity: 0.14
       approach_velocity_scaling_dist: 0.6
       use_collision_detection: true
       max_allowed_time_to_collision_up_to_carrot: 0.6
@@ -204,12 +204,12 @@ controller_server:
       use_fixed_curvature_lookahead: false
       curvature_lookahead_dist: 0.25
       use_cost_regulated_linear_velocity_scaling: false
-      regulated_linear_scaling_min_radius: 0.12
-      regulated_linear_scaling_min_speed: 0.145
+      regulated_linear_scaling_min_radius: 0.6
+      regulated_linear_scaling_min_speed: 0.14
       use_rotate_to_heading: true
       allow_reversing: true
       rotate_to_heading_min_angle: 0.785
-      max_angular_accel: 3.2
+      max_angular_accel: 320000.00
       max_robot_pose_search_dist: 10.0
 
 # controller_server:
@@ -531,11 +531,11 @@ velocity_smoother:
     smoothing_frequency: 30.0
     scale_velocities: False
     feedback: "CLOSED_LOOP" # "OPEN_LOOP"
-    max_velocity: [0.22, 0.0, 0.16]
-    min_velocity: [-0.22, -0.0, -0.16]
-    max_accel: [500.0, 0.0, 100.0] # [2.5, 2.5, 3.2]
-    max_decel: [-500.0, 0.0, -100.0] # [-2.5, -2.5, -3.2]
+    max_velocity: [0.25, 0.0, 0.7]
+    min_velocity: [-0.25, -0.0, -0.7]
+    max_accel: [50.0, 0.0, 10.0] # [2.5, 2.5, 3.2]
+    max_decel: [-50.0, 0.0, -10.0] # [-2.5, -2.5, -3.2]
     odom_topic: "transformed_odom"
     odom_duration: 0.1
-    deadband_velocity: [0.01, 0.0, 0.03] # [0.1, 0.0, 0.12]
+    # deadband_velocity: [0.1, 0.0, 0.6] # [0.1, 0.0, 0.12]
     velocity_timeout: 1.0
