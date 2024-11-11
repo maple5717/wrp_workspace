@@ -5,6 +5,11 @@ Navigation support of nus-wheelchair.
 1. Ubuntu >= 20.04 (22.04 is preferred)
 2. ROS2 installed (tested with humble and foxy)
 
+# Warnings #
+1. The camera pose in urdf file is not calibrated, same as the foorprinti info in nav_params.yaml 
+2. Behavior server and controller send conflict commands when obstacle is ahead.  
+
+
 <!-- ROS1 installed (tested with noetic)
 
 ros1_bridge (correct version) installed (see [this link](https://github.com/ros2/ros1_bridge)) -->
@@ -93,7 +98,18 @@ Launch the orbslam node together with odom_tf node to get odometry published at 
 ```
 ros2 launch wheelchair_slam orbslam_start.launch.py
 ```
-To navigate, run
+
+
+To add an additional PID control loop to the low-level controller, run
+```
+ros2 run pid wheelchair_pid.launch.py
+``` 
+Then in another terminal, run the nav2 stack
+```
+ros2 launch wrp_nav wheelchair_nav.launch.py /cmd_vel:=/expected_vel | grep -v "Message Filter  dropping message: frame"
+```
+
+Otherwise, simply execute
 ```
 ros2 launch wrp_nav wheelchair_nav.launch.py 
 ```
@@ -136,11 +152,13 @@ rosbag record -O test_hector_d435i /camera/camera/color/image_raw /camera/camera
 ## Potential Problems ##
 If you meet the QOS problem when subscribing to the imu data, please refer to the solution in [this link](https://github.com/IntelRealSense/realsense-ros/issues/3033#issuecomment-1983139591)
 
-Library not found
+<!-- Library not found
 ```
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/clearlab/wrp_workspace/src/vio/ORB-SLAM3-STEREO-FIXED/lib
-```
+``` -->
 
+### Wheelchair Low-level Controller ###
+If the wheelchair struggles to move when the input speed (sent by the msg /cmd_vel) is small, introducing another PID loop can alleviate the problem. 
 
 
 # Notes #
