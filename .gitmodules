@@ -42,3 +42,10 @@
 	path = src/slam/depthimage_to_laserscan
 	url = https://github.com/ros-perception/depthimage_to_laserscan.git
 	branch = ros2
+[submodule "src/slam/full_depthimage_to_laserscan"]
+	path = src/slam/full_depthimage_to_laserscan
+	url = https://github.com/ivaROS/full_depthimage_to_laserscan.git
+[submodule "src/slam/pid"]
+	path = src/slam/pid
+	url = https://github.com/maple5717/pid.git
+	branch = ros2
