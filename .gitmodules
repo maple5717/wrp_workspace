@@ -28,3 +28,5 @@
 	path = src/slam/pid
 	url = https://github.com/maple5717/pid.git
 	branch = ros2
+[submodule "pid"]
+	branch = ros2
