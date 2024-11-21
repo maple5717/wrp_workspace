@@ -9,66 +9,12 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 def generate_launch_description():
-    # use_sim_time = LaunchConfiguration('use_sim_time')
-
-    # declare_use_sim_time_argument = DeclareLaunchArgument(
-    #     'use_sim_time',
-    #     default_value='false',
-    #     description='Use simulation (Gazebo) clock if true'),
-    # use_record_data = DeclareLaunchArgument(
-    #     'use_record_data',
-    #     default_value='false',
-    #     description='Whether to use recorded data (true/false)'
-    # )
-
-    # temporary frame definition
-    # base_tf = Node(
-    #         package='tf2_ros',
-    #         executable='static_transform_publisher',
-    #         arguments=['0', '0', '0', '0', '0', '0', '1', 'odom', 'base_link'],
-    #         output='screen',
-    #     )
-    
-    map_odom_tf = Node(
-            package='tf2_ros',
-            executable='static_transform_publisher',
-            arguments=['0', '0', '0', '0', '0', '0', '1', 'map', 'odom'],
-            output='screen',
-        )
-
-    
-    camera_base_tf = Node(
-            package='tf2_ros',
-            executable='static_transform_publisher',
-            name='camera_base_tf',
-            arguments=['0', '0', '0', '0', '0', '0', '1', 'base_link', 'camera_color_optical_frame'],
-            # output='screen',
-        )
-    lidar_base_tf = Node(
-            package='tf2_ros',
-            executable='static_transform_publisher',
-            name='lidar_base_tf', 
-            arguments=['0', '0', '1.657', '0', '0', '0', '1', 'base_link', 'rslidar'],
-            # output='screen',
-        )
-    # arguments=['0', '0', '1.2', '0.5', '0.5', '0.5', '0.5', 'base_link', 'camera_link'],
-    # arguments=['0', '0', '1.2', '0', '0', '0', '1', 'base_link', 'camera_link'],
-    
-    # fake_tf_publisher = Node(
-    #         # package=FindPackageShare('wheelchair_slam').find('wheelchair_slam'),  # Replace with your actual package name
-    #         executable='fake_lidar_tf.py',  # Replace with your script name
-    #         name='fake_lidar_tf',
-    #         output='screen',
-    #     )
-
-
-
     pointcloud_to_laserscan = Node(
             package='pointcloud_to_laserscan', 
             executable='pointcloud_to_laserscan_node',
             remappings=[
                 ('cloud_in', 'camera/camera/depth/color/points'),
-                # ('scan', ['scanner', '/scan'])
+
                         ],
             parameters=[{
                 'target_frame': 'camera_link',
@@ -86,92 +32,18 @@ def generate_launch_description():
             }],
             name='pointcloud_to_laserscan'
         ) 
-    
-    depth_to_scan = Node(
-            package='depthimage_to_laserscan',
-            executable='depthimage_to_laserscan_node',
-            name='depthimage_to_laserscan',
-            remappings=[('depth', '/camera/camera/depth/image_rect_raw'),
-                        ('depth_camera_info', '/camera/camera/depth/camera_info')],
-            parameters=[{
-                'output_frame': 'camera_depth_optical_frame'
-            }])
 
-    rgbd_to_laserscan = Node(
-            package='depthimage_to_laserscan', 
-            executable='depthimage_to_laserscan_node',
-            remappings=[
-                ('depth', '/camera/camera/aligned_depth_to_color/image_raw'),
-                ('depth_camera_info', '/camera/camera/aligned_depth_to_color/camera_info')
-                        ],
-            parameters=[{
-                'output_frame': 'camera_link',
-                # 'transform_tolerance': 0.01,
-                # 'min_height': -1.1,
-                # 'max_height': 0.0,
-                # 'angle_min': -3.1416,  # -M_PI/2
-                # 'angle_max': 3.1416,  # M_PI/2
-                # 'angle_increment': 0.0087,  # M_PI/360.0
-                'scan_height': 0,
-                'scan_time': 1/30,
-                'range_min': 0.0,
-                'range_max': 10.0,
-                # 'use_inf': True,
-                # 'inf_epsilon': 1.0
-            }],
-            name='rgbd_to_laserscan'
-        ) 
-
-    pkg_cartographer_ros = FindPackageShare('cartographer_ros').find('cartographer_ros')
     config_dir = os.path.join(
         get_package_share_directory('wheelchair_slam'),
         'config',
     )
 
-    # create maps
-    cartographer_node = Node(
-        package = 'cartographer_ros',
-        executable = 'cartographer_node',
-        arguments = [
-            '-configuration_directory', config_dir,
-            '-configuration_basename', 'wheelchair_2d.lua'
-            ],
-        remappings = [
-            # ('/odom', '/mobile_base_node/odom')
-            # ('/odom', '/kimera_vio_ros/odometry')
-            # ('/odom', '/vins_estimator/odometry')
-            ('/odom', '/transformed_odom')
-            ],
-        output = 'screen'
-        )
-    
-    cartographer_occupancy_grid_node = Node(
-        package = 'cartographer_ros',
-        executable = 'cartographer_occupancy_grid_node',
-        parameters = [
-            {'use_sim_time': False},
-            {'resolution': 0.05}],
-        )
-    
     slam_toolbox_launch_dir = get_package_share_directory('wheelchair_slam') + '/launch/'
     slam_toolbox_node = IncludeLaunchDescription(
             PythonLaunchDescriptionSource([
                 slam_toolbox_launch_dir + 'slam_toolbox_online_async.py'
             ]),
         )
-
-
-
-
-    # amcl = Node(   
-    #     package='nav2_map_server',
-    #     executable='map_server',
-    #     name='map_server',
-    #     output='screen',
-    #     parameters=[{'use_sim_time': True}, 
-    #                 {'yaml_filename':map_file} 
-    #                 ]),
-    
 
     
     rviz_file = os.path.join(
@@ -210,47 +82,12 @@ def generate_launch_description():
         
         )
 
-    transformer_config_path = os.path.join(wheelchair_slam_share_dir, "config", "odom_transformer_params.yaml")
-
-    odom_transformer = Node(
-        package="odom_transformer",
-        executable="transformer_node.py",
-        name="odom_transformer",
-        output={"both": {"screen", "log", "own_log"}},
-        parameters=[transformer_config_path],
-    )
-
-    odom2tf = Node(
-        package="odom_to_tf_ros2",
-        executable="odom_to_tf",
-        name="odom_to_tf",
-        output={"both": {"screen", "log", "own_log"}},
-        parameters=[{
-                'frame_id': 'odom',        
-                'child_frame_id': 'base_link',   
-                'odom_topic': '/transformed_odom'             
-            }]
-    )
-
     ld = LaunchDescription()
 
-    # ld.add_action(declare_use_sim_time_argument)
-    # ld.add_action(start_sync_slam_toolbox_node)
-    # ld.add_action(base_tf)
-    # ld.add_action(odom_tf)
-    # ld.add_action(camera_base_tf)
-    # ld.add_action(lidar_base_tf)
-    # ld.add_action(fake_tf_publisher)
-
     ld.add_action(pointcloud_to_laserscan)
-    # ld.add_action(map_odom_tf)
-    # ld.add_action(cartographer_node)
-    # ld.add_action(cartographer_occupancy_grid_node)
     ld.add_action(slam_toolbox_node)
 
     ld.add_action(rviz_node)
     ld.add_action(robot_state_publisher)
-    # ld.add_action(odom_transformer)
-    # ld.add_action(odom2tf)
-    # ld.add_action(ekf)
+  
     return ld
